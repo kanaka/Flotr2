@@ -3730,7 +3730,8 @@ Flotr.addType('bars', {
       data            = options.data,
       context         = options.context,
       shadowSize      = options.shadowSize,
-      i, geometry, left, top, width, height;
+      i, geometry, left, top, width, height,
+      label;
 
     if (data.length < 1) return;
 
@@ -3755,6 +3756,11 @@ Flotr.addType('bars', {
       }
       if (options.lineWidth) {
         context.strokeRect(left, top, width, height);
+      }
+
+      label = data[i][2];
+      if (label) {
+        Flotr.drawText(context, label, left+width/2, top+height/2+7, {size: 7, textAlign: 'center'});
       }
     }
   },
@@ -4806,7 +4812,7 @@ Flotr.addType('points', {
       context = options.context,
       xScale  = options.xScale,
       yScale  = options.yScale,
-      i, x, y;
+      i, x, y, label;
       
     for (i = data.length - 1; i > -1; --i) {
       y = data[i][1];
@@ -4826,6 +4832,11 @@ Flotr.addType('points', {
       }
       context.stroke();
       context.closePath();
+      
+      label = data[i][2];
+      if (label) {
+        Flotr.drawText(context, label, x+4, y-2, {size: 7});
+      }
     }
   }
 });
